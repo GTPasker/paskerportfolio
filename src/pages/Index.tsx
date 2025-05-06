@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -40,12 +41,21 @@ const Index = () => {
           <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto mb-10 animate-fade-in animation-delay-200">
             Applying real-world empathy and principled rigor to the future of AI Verification.
           </p>
-          <Button
-            className="bg-[#F6C90E] text-[#3A4750] hover:bg-[#F6C90E]/90 rounded-md py-6 px-8 text-lg animate-fade-in animation-delay-300"
-            onClick={() => document.getElementById('intro')?.scrollIntoView({ behavior: 'smooth' })}
-          >
-            Explore My Garden <ChevronDown className="ml-2 h-5 w-5" />
-          </Button>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button
+              className="bg-[#F6C90E] text-[#3A4750] hover:bg-[#F6C90E]/90 rounded-md py-6 px-8 text-lg animate-fade-in animation-delay-300"
+              onClick={() => document.getElementById('intro')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Explore My Garden <ChevronDown className="ml-2 h-5 w-5" />
+            </Button>
+            <Link to="/showcase">
+              <Button
+                className="bg-[#F6C90E] text-[#3A4750] hover:bg-[#F6C90E]/90 rounded-md py-6 px-8 text-lg animate-fade-in animation-delay-400"
+              >
+                View My Showcase
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
       
