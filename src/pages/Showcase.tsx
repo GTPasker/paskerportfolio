@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -168,19 +167,19 @@ const Showcase = () => {
                       {/* I positioned at 2 o'clock */}
                       <div className="absolute top-[30%] right-[20%] transform translate-x-1/2 -translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow" style={{
                       animationDelay: '1s'
-                      }}>I</div>
+                    }}>I</div>
                       
                       {/* F positioned at 5 o'clock */}
                       <div className="absolute bottom-[30%] right-[20%] transform translate-x-1/2 translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow" style={{
                       animationDelay: '2s'
-                      }}>F</div>
+                    }}>F</div>
                       
                       {/* E positioned at 8 o'clock */}
                       <div className="absolute bottom-[30%] left-[20%] transform -translate-x-1/2 translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow" style={{
                       animationDelay: '3s'
-                      }}>E</div>
+                    }}>E</div>
                       
-                      <div className="absolute inset-8 bg-[#FF4E50] rounded-full flex items-center justify-center mx-[45px] my-[50px]">
+                      <div className="absolute inset-8 bg-[#FF4E50] rounded-full flex items-center justify-center mx-[75px] my-[75px]">
                         <span className="text-white font-merriweather text-xl">REI</span>
                       </div>
                     </div>
