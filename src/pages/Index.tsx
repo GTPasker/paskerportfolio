@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -122,33 +121,77 @@ const Index = () => {
           <div className="flex flex-col md:flex-row gap-10 items-center">
             <div className="w-full md:w-1/2">
               <div className="aspect-square rounded-full bg-[#3A4750] relative overflow-hidden">
-                <div className="absolute inset-4 rounded-full border-2 border-dashed border-[#F6C90E] animate-spin-slow"></div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="w-3/4 h-3/4 relative">
-                    {/* Abstract garden network visualization */}
-                    <div className="absolute w-4 h-4 bg-[#F6C90E] rounded-full top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
-                    <div className="absolute w-full h-full">
-                      {[...Array(8)].map((_, i) => (
+                <div className="absolute inset-0 bg-opacity-80 bg-[#3A4750] z-10"></div>
+                <div className="absolute inset-4 rounded-full border-2 border-dashed border-[#F6C90E] animate-spin-slow z-20"></div>
+                <div className="absolute inset-0 flex items-center justify-center z-30">
+                  <div className="w-4/5 h-4/5 relative">
+                    {/* Garden Root System */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      {/* Central golden core representing shared foundation */}
+                      <div className="w-10 h-10 bg-[#F6C90E] rounded-full z-40 shadow-lg shadow-[#F6C90E]/30"></div>
+                      
+                      {/* Interconnected root systems */}
+                      {[...Array(12)].map((_, i) => (
                         <div 
                           key={i} 
-                          className="absolute w-3 h-3 bg-[#FF4E50] rounded-full" 
+                          className="absolute w-1 origin-bottom"
                           style={{ 
-                            top: `${50 + 40 * Math.sin(i * Math.PI / 4)}%`, 
-                            left: `${50 + 40 * Math.cos(i * Math.PI / 4)}%`,
-                            animation: `orbit ${10 + i * 2}s linear infinite`
+                            height: `${40 + Math.random() * 20}%`,
+                            background: `linear-gradient(to top, #F6C90E, ${i % 3 === 0 ? '#FF4E50' : i % 3 === 1 ? '#F0F0F0' : '#3A4750'}00)`,
+                            top: '30%', 
+                            left: '50%',
+                            transform: `rotate(${i * 30}deg)`,
+                            opacity: 0.7,
+                            zIndex: 30,
+                          }}
+                        >
+                          {/* Branch offshoots */}
+                          {[...Array(2)].map((_, j) => (
+                            <div 
+                              key={j} 
+                              className="absolute w-[1px]"
+                              style={{ 
+                                height: `${15 + Math.random() * 15}%`,
+                                background: `linear-gradient(to top, ${i % 3 === 0 ? '#FF4E50' : '#F0F0F0'}90, transparent)`,
+                                top: `${30 + Math.random() * 40}%`, 
+                                left: '50%',
+                                transform: `rotate(${(j === 0 ? -1 : 1) * (20 + Math.random() * 20)}deg)`,
+                                transformOrigin: 'bottom',
+                              }}
+                            ></div>
+                          ))}
+                        </div>
+                      ))}
+                      
+                      {/* Interconnected growth points */}
+                      {[...Array(20)].map((_, i) => (
+                        <div 
+                          key={i} 
+                          className="absolute rounded-full"
+                          style={{ 
+                            width: `${2 + Math.random() * 4}px`,
+                            height: `${2 + Math.random() * 4}px`,
+                            backgroundColor: i % 4 === 0 ? '#FF4E50' : i % 4 === 1 ? '#F6C90E' : i % 4 === 2 ? '#F0F0F0' : '#3A4750',
+                            top: `${10 + Math.random() * 80}%`, 
+                            left: `${10 + Math.random() * 80}%`,
+                            boxShadow: `0 0 ${5 + Math.random() * 5}px ${i % 4 === 0 ? '#FF4E50' : i % 4 === 1 ? '#F6C90E' : i % 4 === 2 ? '#F0F0F0' : '#3A4750'}50`,
+                            opacity: 0.8,
+                            zIndex: 35,
+                            animation: `pulse ${3 + Math.random() * 3}s infinite ease-in-out ${Math.random() * 2}s`,
                           }}
                         ></div>
                       ))}
-                    </div>
-                    <div className="absolute w-full h-full">
-                      {[...Array(8)].map((_, i) => (
+                      
+                      {/* Circular connection paths */}
+                      {[...Array(3)].map((_, i) => (
                         <div 
                           key={i} 
-                          className="absolute w-[1px] h-[40%] bg-white/30 origin-bottom" 
+                          className="absolute rounded-full border-[1px] opacity-30"
                           style={{ 
-                            top: '10%', 
-                            left: '50%',
-                            transform: `rotate(${i * 45}deg)`
+                            width: `${55 + i * 20}%`,
+                            height: `${55 + i * 20}%`,
+                            borderColor: i === 0 ? '#F6C90E' : i === 1 ? '#FF4E50' : '#F0F0F0',
+                            animation: `spin ${30 + i * 10}s linear infinite ${i * 2}s`,
                           }}
                         ></div>
                       ))}
