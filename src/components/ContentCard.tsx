@@ -13,6 +13,8 @@ interface ContentCardProps {
   accent?: boolean;
   accentColor?: string;
   accentPosition?: 'top' | 'left' | 'right' | 'bottom';
+  grouped?: boolean;
+  onClick?: () => void;
 }
 
 const ContentCard = ({
@@ -26,6 +28,8 @@ const ContentCard = ({
   accent = false,
   accentColor = '#F6C90E',
   accentPosition = 'top',
+  grouped = false,
+  onClick,
 }: ContentCardProps) => {
   const elevationClasses = {
     none: '',
@@ -34,15 +38,27 @@ const ContentCard = ({
     high: 'shadow-lg'
   };
   
-  const accentPositionClasses = {
-    top: `border-t-2 border-t-[${accentColor}]`,
-    left: `border-l-2 border-l-[${accentColor}]`,
-    right: `border-r-2 border-r-[${accentColor}]`,
-    bottom: `border-b-2 border-b-[${accentColor}]`
+  const getBorderClass = () => {
+    switch (accentPosition) {
+      case 'top':
+        return `border-t-2 border-t-[${accentColor}]`;
+      case 'left':
+        return `border-l-2 border-l-[${accentColor}]`;
+      case 'right':
+        return `border-r-2 border-r-[${accentColor}]`;
+      case 'bottom':
+        return `border-b-2 border-b-[${accentColor}]`;
+      default:
+        return `border-t-2 border-t-[${accentColor}]`;
+    }
   };
   
   const interactiveClass = interactive 
-    ? 'transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer' 
+    ? 'transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F6C90E]/50' 
+    : '';
+
+  const groupedClass = grouped
+    ? 'mb-4 last:mb-0'
     : '';
 
   return (
@@ -50,10 +66,15 @@ const ContentCard = ({
       className={cn(
         'rounded-lg bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 overflow-hidden',
         elevationClasses[elevation],
-        accent ? accentPositionClasses[accentPosition] : '',
+        accent ? getBorderClass() : '',
         interactiveClass,
+        groupedClass,
         className
       )}
+      onClick={interactive && onClick ? onClick : undefined}
+      role={interactive && onClick ? 'button' : undefined}
+      tabIndex={interactive && onClick ? 0 : undefined}
+      onKeyDown={interactive && onClick ? (e) => e.key === 'Enter' && onClick() : undefined}
     >
       {title && (
         <div className={cn('p-4 border-b border-gray-100 dark:border-gray-700', headerClassName)}>

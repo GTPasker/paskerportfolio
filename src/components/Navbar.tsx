@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const Navbar = () => {
@@ -14,13 +14,13 @@ const Navbar = () => {
   const isHomePage = location.pathname === '/';
   
   const navItems = [
-    { name: 'Home', href: '#hero' },
-    { name: 'Journey', href: '#journey' },
-    { name: 'Philosophy', href: '#philosophy' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Showcase', href: '/showcase' },
-    { name: 'Vision', href: '#vision' },
-    { name: 'Connect', href: '#connect' }
+    { name: 'Home', href: '#hero', id: 'hero' },
+    { name: 'Journey', href: '#journey', id: 'journey' },
+    { name: 'Philosophy', href: '#philosophy', id: 'philosophy' },
+    { name: 'Skills', href: '#skills', id: 'skills' },
+    { name: 'Showcase', href: '/showcase', id: '' },
+    { name: 'Vision', href: '#vision', id: 'vision' },
+    { name: 'Connect', href: '#connect', id: 'connect' }
   ];
 
   useEffect(() => {
@@ -91,6 +91,7 @@ const Navbar = () => {
           <Link 
             to="/" 
             className="font-merriweather text-xl font-bold mx-[17px] relative overflow-hidden group"
+            aria-label="Home page"
           >
             <span className="relative z-10">Gabriel Pasker</span>
             <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#F6C90E] transition-all duration-300 group-hover:w-full"></span>
@@ -105,16 +106,12 @@ const Navbar = () => {
               (!item.href.startsWith('#') && location.pathname === item.href);
               
             return (
-              <a
+              <button
                 key={item.name}
-                href={item.href}
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleNavigation(item.href);
-                }}
+                onClick={() => handleNavigation(item.href)}
                 className={cn(
                   "text-sm font-medium px-3 py-2 rounded-md transition-all duration-200 relative",
-                  "hover:text-[#F6C90E] hover:bg-white/10",
+                  "hover:text-[#F6C90E] hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#F6C90E]/50 focus:ring-offset-1 focus:ring-offset-[#3A4750]/50",
                   isActive ? "text-[#F6C90E] bg-white/5" : "text-white"
                 )}
               >
@@ -122,7 +119,7 @@ const Navbar = () => {
                 {isActive && (
                   <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#F6C90E] rounded-full"></span>
                 )}
-              </a>
+              </button>
             );
           })}
         </nav>
@@ -131,9 +128,10 @@ const Navbar = () => {
         <Button 
           variant="ghost" 
           size="icon" 
-          className="md:hidden text-white hover:bg-white/10 transition-all" 
+          className="md:hidden text-white hover:bg-white/10 transition-all focus:ring-2 focus:ring-[#F6C90E]/50" 
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileMenuOpen}
         >
           {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </Button>
@@ -141,7 +139,7 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#3A4750]/95 text-white dark:bg-[#1a2026]/95 backdrop-blur-sm">
+        <div className="md:hidden bg-[#3A4750]/95 text-white dark:bg-[#1a2026]/95 backdrop-blur-sm animate-slide-in-bottom">
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-2">
             {navItems.map(item => {
               const isActive = 
@@ -149,22 +147,18 @@ const Navbar = () => {
                 (!item.href.startsWith('#') && location.pathname === item.href);
                 
               return (
-                <a
+                <button
                   key={item.name}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavigation(item.href);
-                  }}
+                  onClick={() => handleNavigation(item.href)}
                   className={cn(
-                    "text-lg font-medium py-3 px-4 transition-colors rounded-md flex items-center",
+                    "text-lg font-medium py-3 px-4 transition-colors rounded-md flex items-center focus:outline-none focus:ring-2 focus:ring-[#F6C90E]/50",
                     isActive 
                       ? "bg-white/10 text-[#F6C90E] border-l-2 border-[#F6C90E]" 
                       : "hover:bg-white/5 hover:text-[#F6C90E]"
                   )}
                 >
                   {item.name}
-                </a>
+                </button>
               );
             })}
           </div>

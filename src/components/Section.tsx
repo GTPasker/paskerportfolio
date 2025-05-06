@@ -10,6 +10,9 @@ interface SectionProps {
   titleClassName?: string;
   titlePosition?: 'left' | 'center' | 'right';
   subtitle?: string;
+  accentColor?: string;
+  compact?: boolean;
+  decorative?: boolean;
 }
 
 const Section = ({ 
@@ -19,7 +22,10 @@ const Section = ({
   className, 
   titleClassName,
   titlePosition = 'center',
-  subtitle
+  subtitle,
+  accentColor = '#F6C90E',
+  compact = false,
+  decorative = true
 }: SectionProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   
@@ -54,13 +60,14 @@ const Section = ({
       id={id}
       ref={sectionRef}
       className={cn(
-        "py-20 transition-all duration-700 ease-out opacity-0 translate-y-8 relative content-section",
+        "transition-all duration-700 ease-out opacity-0 translate-y-8 relative content-section",
+        compact ? "py-12 md:py-16" : "py-20 md:py-24",
         className
       )}
     >
       <div className="container mx-auto px-4 relative z-10">
         <div className={cn(
-          "mb-12",
+          compact ? "mb-8" : "mb-12",
           titlePosition === 'center' ? "text-center" : 
           titlePosition === 'right' ? "text-right" : "text-left"
         )}>
@@ -69,7 +76,12 @@ const Section = ({
             titleClassName
           )}>
             {title}
-            <span className="absolute bottom-0 left-0 w-24 h-1 bg-[#F6C90E] glow-accent-1"></span>
+            {decorative && (
+              <span 
+                className="absolute bottom-0 left-0 w-24 h-1 glow-accent-1" 
+                style={{ backgroundColor: accentColor }}
+              ></span>
+            )}
           </h2>
           
           {subtitle && (
