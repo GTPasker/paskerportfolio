@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -7,8 +8,10 @@ import Section from "@/components/Section";
 import PreLoader from "@/components/PreLoader";
 import OrganicTexture from "@/components/OrganicTexture";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+
 const Showcase = () => {
   const [isLoading, setIsLoading] = useState(true);
+  
   useEffect(() => {
     // Simulate loading time
     const timer = setTimeout(() => {
@@ -16,9 +19,11 @@ const Showcase = () => {
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
+  
   if (isLoading) {
     return <PreLoader />;
   }
+  
   return <div className="min-h-screen text-[#3A4750] font-lato overflow-hidden">
       <Navbar />
       
@@ -157,30 +162,69 @@ const Showcase = () => {
                 <div className="w-full md:w-1/2">
                   <div className="aspect-square bg-[#3A4750] rounded-lg flex items-center justify-center mb-6 relative overflow-hidden">
                     <OrganicTexture variant="glow" intensity="strong" />
-                    {/* Visual representation of the LIFE model */}
+                    {/* Visual representation of the LIFE model with improved spacing and connections */}
                     <div className="relative w-4/5 h-4/5 z-10">
-                      <div className="absolute inset-0 border-4 border-dashed border-[#F6C90E] rounded-full animate-spin-slow"></div>
+                      {/* Outer dashed circular path */}
+                      <div className="absolute inset-0 border-4 border-dashed border-[#F6C90E]/60 rounded-full animate-spin-slow"></div>
+                      
+                      {/* Connecting lines from center to each letter */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        {/* Line to L */}
+                        <div className="absolute w-[35%] h-[2px] bg-[#F6C90E]/70 transform rotate-[135deg] origin-right z-0 glow-accent-1"></div>
+                        {/* Line to I */}
+                        <div className="absolute w-[35%] h-[2px] bg-[#F6C90E]/70 transform rotate-[45deg] origin-right z-0 glow-accent-1"></div>
+                        {/* Line to F */}
+                        <div className="absolute w-[35%] h-[2px] bg-[#F6C90E]/70 transform rotate-[-45deg] origin-right z-0 glow-accent-1"></div>
+                        {/* Line to E */}
+                        <div className="absolute w-[35%] h-[2px] bg-[#F6C90E]/70 transform rotate-[-135deg] origin-right z-0 glow-accent-1"></div>
+                      </div>
                       
                       {/* L positioned at 10 o'clock */}
-                      <div className="absolute top-[30%] left-[20%] transform -translate-x-1/2 -translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow">L</div>
+                      <div className="absolute top-[20%] left-[20%] transform -translate-x-1/2 -translate-y-1/2 z-10">
+                        <div className="relative">
+                          <div className="absolute inset-0 rounded-full bg-[#F6C90E]/20 animate-pulse-slow scale-125"></div>
+                          <div className="bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold shadow-lg relative z-10">L</div>
+                        </div>
+                      </div>
                       
                       {/* I positioned at 2 o'clock */}
-                      <div className="absolute top-[30%] right-[20%] transform translate-x-1/2 -translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow" style={{
-                      animationDelay: '1s'
-                    }}>I</div>
+                      <div className="absolute top-[20%] right-[20%] transform translate-x-1/2 -translate-y-1/2 z-10">
+                        <div className="relative">
+                          <div className="absolute inset-0 rounded-full bg-[#F6C90E]/20 animate-pulse-slow scale-125" style={{
+                            animationDelay: '1s'
+                          }}></div>
+                          <div className="bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold shadow-lg relative z-10">I</div>
+                        </div>
+                      </div>
                       
                       {/* F positioned at 5 o'clock */}
-                      <div className="absolute bottom-[30%] right-[20%] transform translate-x-1/2 translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow" style={{
-                      animationDelay: '2s'
-                    }}>F</div>
+                      <div className="absolute bottom-[20%] right-[20%] transform translate-x-1/2 translate-y-1/2 z-10">
+                        <div className="relative">
+                          <div className="absolute inset-0 rounded-full bg-[#F6C90E]/20 animate-pulse-slow scale-125" style={{
+                            animationDelay: '2s'
+                          }}></div>
+                          <div className="bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold shadow-lg relative z-10">F</div>
+                        </div>
+                      </div>
                       
                       {/* E positioned at 8 o'clock */}
-                      <div className="absolute bottom-[30%] left-[20%] transform -translate-x-1/2 translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow" style={{
-                      animationDelay: '3s'
-                    }}>E</div>
+                      <div className="absolute bottom-[20%] left-[20%] transform -translate-x-1/2 translate-y-1/2 z-10">
+                        <div className="relative">
+                          <div className="absolute inset-0 rounded-full bg-[#F6C90E]/20 animate-pulse-slow scale-125" style={{
+                            animationDelay: '3s'
+                          }}></div>
+                          <div className="bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold shadow-lg relative z-10">E</div>
+                        </div>
+                      </div>
                       
-                      <div className="absolute inset-8 bg-[#FF4E50] rounded-full flex items-center justify-center mx-[75px] my-[75px]">
-                        <span className="text-white font-merriweather text-xl">REI</span>
+                      {/* Center REI circle */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="relative">
+                          <div className="absolute inset-0 rounded-full bg-[#FF4E50]/30 animate-pulse-slow scale-125" style={{
+                            animationDelay: '0.5s'
+                          }}></div>
+                          <div className="bg-[#FF4E50] w-20 h-20 rounded-full flex items-center justify-center text-white font-merriweather text-xl shadow-lg z-20">REI</div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -286,4 +330,5 @@ const Showcase = () => {
       <Footer />
     </div>;
 };
+
 export default Showcase;
