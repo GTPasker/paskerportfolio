@@ -15,10 +15,10 @@ const Navbar = () => {
   
   const navItems = [
     { name: 'Home', href: '#hero', id: 'hero' },
+    { name: 'Showcase', href: '/showcase', id: '' },
     { name: 'Journey', href: '#journey', id: 'journey' },
     { name: 'Philosophy', href: '#philosophy', id: 'philosophy' },
     { name: 'Skills', href: '#skills', id: 'skills' },
-    { name: 'Showcase', href: '/showcase', id: '' },
     { name: 'Vision', href: '#vision', id: 'vision' },
     { name: 'Connect', href: '#connect', id: 'connect' }
   ];
