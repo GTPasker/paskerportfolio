@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -8,6 +8,9 @@ import { cn } from '@/lib/utils';
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isHomePage = location.pathname === '/';
   
   const navItems = [
     { name: 'Home', href: '#hero' },
@@ -31,15 +34,26 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId: string) => {
+  const handleNavigation = (href: string) => {
     setMobileMenuOpen(false);
-    if (sectionId.startsWith('#')) {
-      const element = document.getElementById(sectionId.substring(1));
-      if (element) {
-        element.scrollIntoView({
-          behavior: 'smooth'
-        });
+    
+    if (href.startsWith('#')) {
+      // Handle navigation to section on the same page
+      if (isHomePage) {
+        // If already on home page, scroll to the section
+        const element = document.getElementById(href.substring(1));
+        if (element) {
+          element.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      } else {
+        // If on another page, navigate to home page with the section hash
+        navigate('/' + href);
       }
+    } else {
+      // For regular page navigation (like /showcase)
+      navigate(href);
     }
   };
 
@@ -65,11 +79,9 @@ const Navbar = () => {
             <a
               key={item.name}
               href={item.href}
-              onClick={e => {
-                if (item.href.startsWith('#')) {
-                  e.preventDefault();
-                  scrollToSection(item.href);
-                }
+              onClick={(e) => {
+                e.preventDefault();
+                handleNavigation(item.href);
               }}
               className={cn(
                 "text-sm font-medium transition-colors hover:text-[#F6C90E] relative",
@@ -101,13 +113,9 @@ const Navbar = () => {
               <a
                 key={item.name}
                 href={item.href}
-                onClick={e => {
-                  if (item.href.startsWith('#')) {
-                    e.preventDefault();
-                    scrollToSection(item.href);
-                  } else {
-                    setMobileMenuOpen(false);
-                  }
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavigation(item.href);
                 }}
                 className="text-lg font-medium transition-colors py-2 hover:text-[#F6C90E]"
               >
