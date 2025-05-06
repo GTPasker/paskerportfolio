@@ -43,14 +43,14 @@ const Section = ({ id, title, children, className }: SectionProps) => {
       id={id}
       ref={sectionRef}
       className={cn(
-        "py-20 transition-all duration-500 ease-out opacity-0 translate-y-8",
+        "py-20 transition-all duration-500 ease-out opacity-0 translate-y-8 relative",
         className
       )}
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 relative z-10">
         <h2 className="font-merriweather text-3xl md:text-4xl text-center mb-12 relative pb-4 inline-block mx-auto">
           {title}
-          <span className="absolute bottom-0 left-1/2 w-24 h-1 bg-[#F6C90E] transform -translate-x-1/2"></span>
+          <span className="absolute bottom-0 left-1/2 w-24 h-1 bg-[#F6C90E] transform -translate-x-1/2 glow-accent-1"></span>
         </h2>
         {children}
       </div>
