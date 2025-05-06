@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -8,10 +7,8 @@ import Section from "@/components/Section";
 import PreLoader from "@/components/PreLoader";
 import OrganicTexture from "@/components/OrganicTexture";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-
 const Showcase = () => {
   const [isLoading, setIsLoading] = useState(true);
-  
   useEffect(() => {
     // Simulate loading time
     const timer = setTimeout(() => {
@@ -19,11 +16,9 @@ const Showcase = () => {
     }, 1500);
     return () => clearTimeout(timer);
   }, []);
-  
   if (isLoading) {
     return <PreLoader />;
   }
-  
   return <div className="min-h-screen text-[#3A4750] font-lato overflow-hidden">
       <Navbar />
       
@@ -191,8 +186,8 @@ const Showcase = () => {
                       <div className="absolute top-[20%] right-[20%] transform translate-x-1/2 -translate-y-1/2 z-10">
                         <div className="relative">
                           <div className="absolute inset-0 rounded-full bg-[#F6C90E]/20 animate-pulse-slow scale-125" style={{
-                            animationDelay: '1s'
-                          }}></div>
+                          animationDelay: '1s'
+                        }}></div>
                           <div className="bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold shadow-lg relative z-10">I</div>
                         </div>
                       </div>
@@ -201,8 +196,8 @@ const Showcase = () => {
                       <div className="absolute bottom-[20%] right-[20%] transform translate-x-1/2 translate-y-1/2 z-10">
                         <div className="relative">
                           <div className="absolute inset-0 rounded-full bg-[#F6C90E]/20 animate-pulse-slow scale-125" style={{
-                            animationDelay: '2s'
-                          }}></div>
+                          animationDelay: '2s'
+                        }}></div>
                           <div className="bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold shadow-lg relative z-10">F</div>
                         </div>
                       </div>
@@ -211,8 +206,8 @@ const Showcase = () => {
                       <div className="absolute bottom-[20%] left-[20%] transform -translate-x-1/2 translate-y-1/2 z-10">
                         <div className="relative">
                           <div className="absolute inset-0 rounded-full bg-[#F6C90E]/20 animate-pulse-slow scale-125" style={{
-                            animationDelay: '3s'
-                          }}></div>
+                          animationDelay: '3s'
+                        }}></div>
                           <div className="bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold shadow-lg relative z-10">E</div>
                         </div>
                       </div>
@@ -220,10 +215,10 @@ const Showcase = () => {
                       {/* Center REI circle */}
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div className="relative">
-                          <div className="absolute inset-0 rounded-full bg-[#FF4E50]/30 animate-pulse-slow scale-125" style={{
-                            animationDelay: '0.5s'
-                          }}></div>
-                          <div className="bg-[#FF4E50] w-20 h-20 rounded-full flex items-center justify-center text-white font-merriweather text-xl shadow-lg z-20">REI</div>
+                          <div style={{
+                          animationDelay: '0.5s'
+                        }} className="absolute inset-0 bg-[#FF4E50]/30 animate-pulse-slow scale-125 px-[49px] py-[48px] rounded-sm mx-[21px] my-0"></div>
+                          <div className="bg-[#FF4E50] w-20 h-20 rounded-full flex items-center justify-center text-white font-merriweather text-xl shadow-lg z-20 mx-[34px] my-[7px]">REI</div>
                         </div>
                       </div>
                     </div>
@@ -330,5 +325,4 @@ const Showcase = () => {
       <Footer />
     </div>;
 };
-
 export default Showcase;
