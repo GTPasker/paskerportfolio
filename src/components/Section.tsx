@@ -7,9 +7,20 @@ interface SectionProps {
   title: string;
   children: ReactNode;
   className?: string;
+  titleClassName?: string;
+  titlePosition?: 'left' | 'center' | 'right';
+  subtitle?: string;
 }
 
-const Section = ({ id, title, children, className }: SectionProps) => {
+const Section = ({ 
+  id, 
+  title, 
+  children, 
+  className, 
+  titleClassName,
+  titlePosition = 'center',
+  subtitle
+}: SectionProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   
   useEffect(() => {
@@ -43,15 +54,30 @@ const Section = ({ id, title, children, className }: SectionProps) => {
       id={id}
       ref={sectionRef}
       className={cn(
-        "py-20 transition-all duration-500 ease-out opacity-0 translate-y-8 relative",
+        "py-20 transition-all duration-700 ease-out opacity-0 translate-y-8 relative content-section",
         className
       )}
     >
       <div className="container mx-auto px-4 relative z-10">
-        <h2 className="font-merriweather text-3xl md:text-4xl text-center mb-12 relative pb-4 inline-block mx-auto">
-          {title}
-          <span className="absolute bottom-0 left-1/2 w-24 h-1 bg-[#F6C90E] transform -translate-x-1/2 glow-accent-1"></span>
-        </h2>
+        <div className={cn(
+          "mb-12",
+          titlePosition === 'center' ? "text-center" : 
+          titlePosition === 'right' ? "text-right" : "text-left"
+        )}>
+          <h2 className={cn(
+            "font-merriweather text-3xl md:text-4xl relative pb-4 inline-block",
+            titleClassName
+          )}>
+            {title}
+            <span className="absolute bottom-0 left-0 w-24 h-1 bg-[#F6C90E] glow-accent-1"></span>
+          </h2>
+          
+          {subtitle && (
+            <p className="text-lg mt-4 text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              {subtitle}
+            </p>
+          )}
+        </div>
         {children}
       </div>
     </section>

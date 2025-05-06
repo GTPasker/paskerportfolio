@@ -2,12 +2,13 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
   const location = useLocation();
   const navigate = useNavigate();
   const isHomePage = location.pathname === '/';
@@ -25,6 +26,25 @@ const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
+      
+      // Update active section based on scroll position
+      if (isHomePage) {
+        const sections = navItems
+          .filter(item => item.href.startsWith('#'))
+          .map(item => item.href.substring(1));
+          
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            // If the section is in view (with some buffer for better UX)
+            if (rect.top <= 100 && rect.bottom >= 100) {
+              setActiveSection(section);
+              break;
+            }
+          }
+        }
+      }
     };
     
     window.addEventListener('scroll', handleScroll);
@@ -32,7 +52,7 @@ const Navbar = () => {
     handleScroll();
     
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isHomePage, navItems]);
 
   const handleNavigation = (href: string) => {
     setMobileMenuOpen(false);
@@ -62,54 +82,29 @@ const Navbar = () => {
       className={cn(
         "fixed top-0 left-0 w-full z-50 transition-all duration-300",
         isScrolled 
-          ? "bg-[#3A4750] text-white shadow-md py-2 dark:bg-[#1a2026]" 
-          : "bg-[#3A4750] text-white py-4 dark:bg-[#1a2026]"
+          ? "bg-[#3A4750]/95 text-white shadow-md py-2 backdrop-blur-sm dark:bg-[#1a2026]/95" 
+          : "bg-[#3A4750]/85 text-white py-4 backdrop-blur-sm dark:bg-[#1a2026]/85"
       )}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center">
-          <Link to="/" className="font-merriweather text-xl font-bold mx-[17px]">
-            Gabriel Pasker
+          <Link 
+            to="/" 
+            className="font-merriweather text-xl font-bold mx-[17px] relative overflow-hidden group"
+          >
+            <span className="relative z-10">Gabriel Pasker</span>
+            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#F6C90E] transition-all duration-300 group-hover:w-full"></span>
           </Link>
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-6">
-          {navItems.map(item => (
-            <a
-              key={item.name}
-              href={item.href}
-              onClick={(e) => {
-                e.preventDefault();
-                handleNavigation(item.href);
-              }}
-              className={cn(
-                "text-sm font-medium transition-colors hover:text-[#F6C90E] relative",
-                "after:absolute after:bottom-[-4px] after:left-0 after:right-0 after:h-[2px] after:bg-[#F6C90E]",
-                "after:scale-x-0 after:origin-left after:transition-transform hover:after:scale-x-100"
-              )}
-            >
-              {item.name}
-            </a>
-          ))}
-        </nav>
-
-        {/* Mobile Menu Button */}
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          className="md:hidden text-white hover:bg-[#3A4750]/20 dark:hover:bg-[#1a2026]/20" 
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X /> : <Menu />}
-        </Button>
-      </div>
-
-      {/* Mobile Navigation */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-[#3A4750] text-white dark:bg-[#1a2026]">
-          <div className="container mx-auto px-4 py-4 flex flex-col space-y-4">
-            {navItems.map(item => (
+        <nav className="hidden md:flex space-x-1 lg:space-x-2">
+          {navItems.map(item => {
+            const isActive = 
+              (item.href.startsWith('#') && activeSection === item.href.substring(1)) ||
+              (!item.href.startsWith('#') && location.pathname === item.href);
+              
+            return (
               <a
                 key={item.name}
                 href={item.href}
@@ -117,11 +112,61 @@ const Navbar = () => {
                   e.preventDefault();
                   handleNavigation(item.href);
                 }}
-                className="text-lg font-medium transition-colors py-2 hover:text-[#F6C90E]"
+                className={cn(
+                  "text-sm font-medium px-3 py-2 rounded-md transition-all duration-200 relative",
+                  "hover:text-[#F6C90E] hover:bg-white/10",
+                  isActive ? "text-[#F6C90E] bg-white/5" : "text-white"
+                )}
               >
-                {item.name}
+                <span className="relative z-10">{item.name}</span>
+                {isActive && (
+                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#F6C90E] rounded-full"></span>
+                )}
               </a>
-            ))}
+            );
+          })}
+        </nav>
+
+        {/* Mobile Menu Button */}
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="md:hidden text-white hover:bg-white/10 transition-all" 
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+        >
+          {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </Button>
+      </div>
+
+      {/* Mobile Navigation */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-[#3A4750]/95 text-white dark:bg-[#1a2026]/95 backdrop-blur-sm">
+          <div className="container mx-auto px-4 py-4 flex flex-col space-y-2">
+            {navItems.map(item => {
+              const isActive = 
+                (item.href.startsWith('#') && activeSection === item.href.substring(1)) ||
+                (!item.href.startsWith('#') && location.pathname === item.href);
+                
+              return (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleNavigation(item.href);
+                  }}
+                  className={cn(
+                    "text-lg font-medium py-3 px-4 transition-colors rounded-md flex items-center",
+                    isActive 
+                      ? "bg-white/10 text-[#F6C90E] border-l-2 border-[#F6C90E]" 
+                      : "hover:bg-white/5 hover:text-[#F6C90E]"
+                  )}
+                >
+                  {item.name}
+                </a>
+              );
+            })}
           </div>
         </div>
       )}
