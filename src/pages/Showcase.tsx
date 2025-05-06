@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -8,25 +7,19 @@ import Section from "@/components/Section";
 import PreLoader from "@/components/PreLoader";
 import OrganicTexture from "@/components/OrganicTexture";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-
 const Showcase = () => {
   const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     // Simulate loading time
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 1500);
-    
     return () => clearTimeout(timer);
   }, []);
-
   if (isLoading) {
     return <PreLoader />;
   }
-
-  return (
-    <div className="min-h-screen text-[#3A4750] font-lato overflow-hidden">
+  return <div className="min-h-screen text-[#3A4750] font-lato overflow-hidden">
       <Navbar />
       
       {/* Header Banner */}
@@ -43,11 +36,7 @@ const Showcase = () => {
       </div>
       
       {/* Introduction */}
-      <Section 
-        id="showcase-intro" 
-        title="My Work in Action" 
-        className="relative garden-section-light"
-      >
+      <Section id="showcase-intro" title="My Work in Action" className="relative garden-section-light">
         <OrganicTexture variant="branches" intensity="subtle" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <p className="text-xl mb-6">
@@ -62,11 +51,7 @@ const Showcase = () => {
       </Section>
       
       {/* Website Building Project */}
-      <Section 
-        id="website-project" 
-        title="Cultivating Digital Spaces" 
-        className="relative bg-white overflow-hidden"
-      >
+      <Section id="website-project" title="Cultivating Digital Spaces" className="relative bg-white overflow-hidden">
         <div className="absolute inset-0 bg-pattern-leaves opacity-5"></div>
         <OrganicTexture variant="soil" intensity="subtle" />
         <div className="max-w-5xl mx-auto relative z-10">
@@ -123,11 +108,7 @@ const Showcase = () => {
       </Section>
       
       {/* Ethical Framework Project */}
-      <Section 
-        id="ethical-framework" 
-        title="Designing Ethical Frameworks" 
-        className="relative garden-section-light overflow-hidden"
-      >
+      <Section id="ethical-framework" title="Designing Ethical Frameworks" className="relative garden-section-light overflow-hidden">
         <OrganicTexture variant="branches" position="tr" />
         <OrganicTexture variant="glow" position="bl" intensity="medium" />
         <div className="max-w-5xl mx-auto relative z-10">
@@ -182,13 +163,19 @@ const Showcase = () => {
                       
                       <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow">L</div>
                       
-                      <div className="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow" style={{ animationDelay: '1s' }}>I</div>
+                      <div className="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow" style={{
+                      animationDelay: '1s'
+                    }}>I</div>
                       
-                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow" style={{ animationDelay: '2s' }}>F</div>
+                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow" style={{
+                      animationDelay: '2s'
+                    }}>F</div>
                       
-                      <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow" style={{ animationDelay: '3s' }}>E</div>
+                      <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow" style={{
+                      animationDelay: '3s'
+                    }}>E</div>
                       
-                      <div className="absolute inset-8 bg-[#FF4E50] rounded-full flex items-center justify-center">
+                      <div className="absolute inset-8 bg-[#FF4E50] rounded-full flex items-center justify-center mx-[45px] my-[50px]">
                         <span className="text-white font-merriweather text-xl">REI</span>
                       </div>
                     </div>
@@ -220,11 +207,7 @@ const Showcase = () => {
       </Section>
       
       {/* Future Projects Section */}
-      <Section 
-        id="future-projects" 
-        title="Seeds for Future Growth" 
-        className="relative bg-white overflow-hidden"
-      >
+      <Section id="future-projects" title="Seeds for Future Growth" className="relative bg-white overflow-hidden">
         <div className="absolute inset-0 bg-pattern-soil opacity-5"></div>
         <OrganicTexture variant="roots" intensity="subtle" position="tr" />
         <div className="max-w-5xl mx-auto relative z-10">
@@ -272,11 +255,7 @@ const Showcase = () => {
       </Section>
       
       {/* Resume Section */}
-      <Section 
-        id="resume" 
-        title="My Professional Background" 
-        className="relative garden-section-light overflow-hidden"
-      >
+      <Section id="resume" title="My Professional Background" className="relative garden-section-light overflow-hidden">
         <OrganicTexture variant="branches" intensity="subtle" position="br" />
         <div className="max-w-4xl mx-auto text-center relative z-10">
           <p className="text-xl mb-8">
@@ -301,8 +280,6 @@ const Showcase = () => {
       </Section>
       
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default Showcase;
