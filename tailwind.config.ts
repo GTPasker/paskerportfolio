@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -189,7 +190,25 @@ export default {
 				'width': 'width',
 				'colors': 'color, background-color, border-color, text-decoration-color, fill, stroke',
 				'opacity-transform': 'opacity, transform',
-			}
+			},
+            // Add opacity modifiers for custom colors using CSS variables
+            opacity: {
+                '98': '0.98',
+                '95': '0.95',
+                '90': '0.90',
+                '85': '0.85',
+                '80': '0.80',
+                '75': '0.75',
+                '70': '0.70',
+                '60': '0.60',
+                '50': '0.50',
+                '40': '0.40',
+                '30': '0.30',
+                '20': '0.20',
+                '15': '0.15',
+                '10': '0.10',
+                '5': '0.05',
+            }
 		}
 	},
 	plugins: [require("tailwindcss-animate")],

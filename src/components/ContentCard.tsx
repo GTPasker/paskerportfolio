@@ -75,6 +75,8 @@ const ContentCard = ({
     <div
       className={cn(
         'rounded-lg bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 overflow-hidden',
+        'transition-all duration-300',
+        'animate-fade-in',
         elevationClasses[elevation],
         getBorderClass(),
         interactiveClass,
@@ -100,6 +102,7 @@ const ContentCard = ({
         <div 
           className={cn(
             'p-4 border-b border-gray-100 dark:border-gray-700',
+            'flex items-center',
             headerClassName
           )}
         >

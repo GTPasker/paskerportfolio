@@ -292,11 +292,8 @@
   animation: pulse 4s infinite ease-in-out;
 }
 
-/* Keep existing code (root styles, specific app styles) */
-
 /* Focus styles for accessibility */
 :focus-visible {
   outline: 2px solid #F6C90E;
   outline-offset: 2px;
 }
-
