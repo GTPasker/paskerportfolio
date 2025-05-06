@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
@@ -161,19 +162,23 @@ const Showcase = () => {
                     <div className="relative w-4/5 h-4/5 z-10">
                       <div className="absolute inset-0 border-4 border-dashed border-[#F6C90E] rounded-full animate-spin-slow"></div>
                       
-                      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow">L</div>
+                      {/* L positioned at 10 o'clock */}
+                      <div className="absolute top-[30%] left-[20%] transform -translate-x-1/2 -translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow">L</div>
                       
-                      <div className="absolute right-0 top-1/2 transform translate-x-1/2 -translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow" style={{
+                      {/* I positioned at 2 o'clock */}
+                      <div className="absolute top-[30%] right-[20%] transform translate-x-1/2 -translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow" style={{
                       animationDelay: '1s'
-                    }}>I</div>
+                      }}>I</div>
                       
-                      <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow" style={{
+                      {/* F positioned at 5 o'clock */}
+                      <div className="absolute bottom-[30%] right-[20%] transform translate-x-1/2 translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow" style={{
                       animationDelay: '2s'
-                    }}>F</div>
+                      }}>F</div>
                       
-                      <div className="absolute left-0 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow" style={{
+                      {/* E positioned at 8 o'clock */}
+                      <div className="absolute bottom-[30%] left-[20%] transform -translate-x-1/2 translate-y-1/2 bg-[#F6C90E] text-[#3A4750] w-16 h-16 rounded-full flex items-center justify-center font-bold animate-pulse-slow" style={{
                       animationDelay: '3s'
-                    }}>E</div>
+                      }}>E</div>
                       
                       <div className="absolute inset-8 bg-[#FF4E50] rounded-full flex items-center justify-center mx-[45px] my-[50px]">
                         <span className="text-white font-merriweather text-xl">REI</span>
