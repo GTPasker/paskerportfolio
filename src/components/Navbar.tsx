@@ -32,17 +32,27 @@ const Navbar = () => {
         const sections = navItems
           .filter(item => item.href.startsWith('#'))
           .map(item => item.href.substring(1));
-          
+        
+        // Find the section that is currently in view
+        let currentSection = '';
+        let minDistanceFromTop = Infinity;
+        
         for (const section of sections) {
           const element = document.getElementById(section);
           if (element) {
             const rect = element.getBoundingClientRect();
-            // If the section is in view (with some buffer for better UX)
-            if (rect.top <= 100 && rect.bottom >= 100) {
-              setActiveSection(section);
-              break;
+            const distanceFromTop = Math.abs(rect.top);
+            
+            // Find the section closest to the top of viewport
+            if (distanceFromTop < minDistanceFromTop && rect.top <= 100) {
+              minDistanceFromTop = distanceFromTop;
+              currentSection = section;
             }
           }
+        }
+        
+        if (currentSection) {
+          setActiveSection(currentSection);
         }
       }
     };
@@ -85,21 +95,22 @@ const Navbar = () => {
           ? "bg-[#3A4750]/95 text-white shadow-md py-2 backdrop-blur-sm dark:bg-[#1a2026]/95" 
           : "bg-[#3A4750]/85 text-white py-4 backdrop-blur-sm dark:bg-[#1a2026]/85"
       )}
+      role="banner"
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center">
           <Link 
             to="/" 
-            className="font-merriweather text-xl font-bold mx-[17px] relative overflow-hidden group"
-            aria-label="Home page"
+            className="font-merriweather text-xl font-bold mx-[17px] relative overflow-hidden group focus:outline-none focus:ring-2 focus:ring-[#F6C90E]/50 focus:ring-offset-1 focus:ring-offset-[#3A4750]/50 rounded-md px-2 py-1"
+            aria-label="Gabriel Pasker - Home page"
           >
             <span className="relative z-10">Gabriel Pasker</span>
-            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#F6C90E] transition-all duration-300 group-hover:w-full"></span>
+            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#F6C90E] transition-all duration-300 group-hover:w-full group-focus:w-full"></span>
           </Link>
         </div>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex space-x-1 lg:space-x-2">
+        <nav className="hidden md:flex space-x-1 lg:space-x-2" aria-label="Main Navigation">
           {navItems.map(item => {
             const isActive = 
               (item.href.startsWith('#') && activeSection === item.href.substring(1)) ||
@@ -114,10 +125,14 @@ const Navbar = () => {
                   "hover:text-[#F6C90E] hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#F6C90E]/50 focus:ring-offset-1 focus:ring-offset-[#3A4750]/50",
                   isActive ? "text-[#F6C90E] bg-white/5" : "text-white"
                 )}
+                aria-current={isActive ? "page" : undefined}
               >
                 <span className="relative z-10">{item.name}</span>
                 {isActive && (
-                  <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#F6C90E] rounded-full"></span>
+                  <span 
+                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-[#F6C90E] rounded-full" 
+                    aria-hidden="true"
+                  ></span>
                 )}
               </button>
             );
@@ -132,6 +147,7 @@ const Navbar = () => {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={mobileMenuOpen}
+          aria-controls="mobile-menu"
         >
           {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </Button>
@@ -139,7 +155,12 @@ const Navbar = () => {
 
       {/* Mobile Navigation */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#3A4750]/95 text-white dark:bg-[#1a2026]/95 backdrop-blur-sm animate-slide-in-bottom">
+        <div 
+          id="mobile-menu"
+          className="md:hidden bg-[#3A4750]/95 text-white dark:bg-[#1a2026]/95 backdrop-blur-sm animate-slide-in-bottom"
+          role="navigation"
+          aria-label="Mobile Navigation"
+        >
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-2">
             {navItems.map(item => {
               const isActive = 
@@ -156,6 +177,7 @@ const Navbar = () => {
                       ? "bg-white/10 text-[#F6C90E] border-l-2 border-[#F6C90E]" 
                       : "hover:bg-white/5 hover:text-[#F6C90E]"
                   )}
+                  aria-current={isActive ? "page" : undefined}
                 >
                   {item.name}
                 </button>

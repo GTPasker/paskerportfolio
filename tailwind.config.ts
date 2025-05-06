@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -142,7 +141,24 @@ export default {
 				'slide-in-right': {
 					'0%': { transform: 'translateX(20px)', opacity: '0' },
 					'100%': { transform: 'translateX(0)', opacity: '1' },
-				}
+				},
+				'ripple': {
+					'0%': { transform: 'scale(0)', opacity: '1' },
+					'100%': { transform: 'scale(4)', opacity: '0' },
+				},
+				'bounce-subtle': {
+					'0%, 100%': { transform: 'translateY(0)' },
+					'50%': { transform: 'translateY(-5px)' },
+				},
+				'emphasis': {
+					'0%': { transform: 'scale(1)' },
+					'50%': { transform: 'scale(1.05)' },
+					'100%': { transform: 'scale(1)' },
+				},
+				'shimmer': {
+					'0%': { backgroundPosition: '-200% 0' },
+					'100%': { backgroundPosition: '200% 0' },
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -158,6 +174,10 @@ export default {
 				'slide-in-bottom': 'slide-in-bottom 0.5s ease-out',
 				'slide-in-left': 'slide-in-left 0.5s ease-out',
 				'slide-in-right': 'slide-in-right 0.5s ease-out',
+				'ripple': 'ripple 1s linear forwards',
+				'bounce-subtle': 'bounce-subtle 2s infinite ease-in-out',
+				'emphasis': 'emphasis 0.5s ease-out',
+				'shimmer': 'shimmer 2s infinite linear',
 			},
 			backgroundImage: {
 				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -166,6 +186,9 @@ export default {
 			transitionProperty: {
 				'height': 'height',
 				'spacing': 'margin, padding',
+				'width': 'width',
+				'colors': 'color, background-color, border-color, text-decoration-color, fill, stroke',
+				'opacity-transform': 'opacity, transform',
 			}
 		}
 	},

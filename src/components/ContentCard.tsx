@@ -14,7 +14,9 @@ interface ContentCardProps {
   accentColor?: string;
   accentPosition?: 'top' | 'left' | 'right' | 'bottom';
   grouped?: boolean;
+  highlighted?: boolean;
   onClick?: () => void;
+  ariaLabel?: string;
 }
 
 const ContentCard = ({
@@ -29,7 +31,9 @@ const ContentCard = ({
   accentColor = '#F6C90E',
   accentPosition = 'top',
   grouped = false,
+  highlighted = false,
   onClick,
+  ariaLabel,
 }: ContentCardProps) => {
   const elevationClasses = {
     none: '',
@@ -39,26 +43,32 @@ const ContentCard = ({
   };
   
   const getBorderClass = () => {
+    if (!accent) return '';
+    
     switch (accentPosition) {
       case 'top':
-        return `border-t-2 border-t-[${accentColor}]`;
+        return `border-t-2`;
       case 'left':
-        return `border-l-2 border-l-[${accentColor}]`;
+        return `border-l-2`;
       case 'right':
-        return `border-r-2 border-r-[${accentColor}]`;
+        return `border-r-2`;
       case 'bottom':
-        return `border-b-2 border-b-[${accentColor}]`;
+        return `border-b-2`;
       default:
-        return `border-t-2 border-t-[${accentColor}]`;
+        return `border-t-2`;
     }
   };
   
   const interactiveClass = interactive 
-    ? 'transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#F6C90E]/50' 
+    ? 'transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 dark:focus:ring-offset-gray-800' 
     : '';
 
   const groupedClass = grouped
     ? 'mb-4 last:mb-0'
+    : '';
+    
+  const highlightedClass = highlighted
+    ? 'ring-2 ring-offset-2 dark:ring-offset-gray-800'
     : '';
 
   return (
@@ -66,18 +76,33 @@ const ContentCard = ({
       className={cn(
         'rounded-lg bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 overflow-hidden',
         elevationClasses[elevation],
-        accent ? getBorderClass() : '',
+        getBorderClass(),
         interactiveClass,
         groupedClass,
+        highlightedClass,
         className
       )}
+      style={accent ? { 
+        [`border-${accentPosition}-color`]: accentColor 
+      } as React.CSSProperties : undefined}
       onClick={interactive && onClick ? onClick : undefined}
-      role={interactive && onClick ? 'button' : undefined}
-      tabIndex={interactive && onClick ? 0 : undefined}
-      onKeyDown={interactive && onClick ? (e) => e.key === 'Enter' && onClick() : undefined}
+      role={interactive ? 'button' : undefined}
+      tabIndex={interactive ? 0 : undefined}
+      aria-label={ariaLabel || title}
+      onKeyDown={interactive && onClick ? (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          onClick();
+        }
+      } : undefined}
     >
       {title && (
-        <div className={cn('p-4 border-b border-gray-100 dark:border-gray-700', headerClassName)}>
+        <div 
+          className={cn(
+            'p-4 border-b border-gray-100 dark:border-gray-700',
+            headerClassName
+          )}
+        >
           <h3 className="font-merriweather text-lg font-medium">{title}</h3>
         </div>
       )}

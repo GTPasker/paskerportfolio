@@ -13,6 +13,8 @@ interface SectionProps {
   accentColor?: string;
   compact?: boolean;
   decorative?: boolean;
+  animationDelay?: number;
+  backgroundPattern?: 'none' | 'soil' | 'leaves';
 }
 
 const Section = ({ 
@@ -25,7 +27,9 @@ const Section = ({
   subtitle,
   accentColor = '#F6C90E',
   compact = false,
-  decorative = true
+  decorative = true,
+  animationDelay = 0,
+  backgroundPattern = 'none'
 }: SectionProps) => {
   const sectionRef = useRef<HTMLElement>(null);
   
@@ -54,6 +58,17 @@ const Section = ({
       }
     };
   }, []);
+
+  const getBackgroundPattern = () => {
+    switch (backgroundPattern) {
+      case 'soil':
+        return 'bg-pattern-soil';
+      case 'leaves':
+        return 'bg-pattern-leaves';
+      default:
+        return '';
+    }
+  };
   
   return (
     <section
@@ -62,8 +77,11 @@ const Section = ({
       className={cn(
         "transition-all duration-700 ease-out opacity-0 translate-y-8 relative content-section",
         compact ? "py-12 md:py-16" : "py-20 md:py-24",
+        getBackgroundPattern(),
         className
       )}
+      style={{ transitionDelay: `${animationDelay}ms` }}
+      aria-labelledby={`section-title-${id}`}
     >
       <div className="container mx-auto px-4 relative z-10">
         <div className={cn(
@@ -71,15 +89,19 @@ const Section = ({
           titlePosition === 'center' ? "text-center" : 
           titlePosition === 'right' ? "text-right" : "text-left"
         )}>
-          <h2 className={cn(
-            "font-merriweather text-3xl md:text-4xl relative pb-4 inline-block",
-            titleClassName
-          )}>
+          <h2 
+            id={`section-title-${id}`}
+            className={cn(
+              "font-merriweather text-3xl md:text-4xl relative pb-4 inline-block",
+              titleClassName
+            )}
+          >
             {title}
             {decorative && (
               <span 
                 className="absolute bottom-0 left-0 w-24 h-1 glow-accent-1" 
                 style={{ backgroundColor: accentColor }}
+                aria-hidden="true"
               ></span>
             )}
           </h2>
@@ -90,7 +112,9 @@ const Section = ({
             </p>
           )}
         </div>
-        {children}
+        <div className="animate-fade-in" style={{ animationDelay: `${animationDelay + 200}ms` }}>
+          {children}
+        </div>
       </div>
     </section>
   );
