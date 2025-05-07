@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Sheet, 
   SheetContent, 
@@ -36,6 +36,32 @@ const AccessibilityPanel = () => {
     dyslexicFont: false
   });
 
+  // On component mount, check if we need to restore any saved preferences
+  useEffect(() => {
+    // Check if high contrast is already applied (on page reload)
+    if (document.documentElement.classList.contains('high-contrast')) {
+      setSettings(prev => ({ ...prev, highContrast: true }));
+    }
+    
+    // Check other settings that might be visibly applied
+    // This ensures UI state matches actual applied state
+    if (document.documentElement.classList.contains('enhanced-focus')) {
+      setSettings(prev => ({ ...prev, enhancedFocus: true }));
+    }
+    
+    if (document.documentElement.classList.contains('dyslexic-font')) {
+      setSettings(prev => ({ ...prev, dyslexicFont: true }));
+    }
+    
+    // Check if reading guide exists
+    if (document.getElementById('reading-guide') && 
+        !document.getElementById('reading-guide')?.classList.contains('hidden')) {
+      setSettings(prev => ({ ...prev, readingGuide: true }));
+    }
+    
+    // Check font size and line spacing from CSS variables if needed
+  }, []);
+
   const handleChange = (key: string, value: number | boolean) => {
     setSettings(prev => ({ ...prev, [key]: value }));
 
@@ -43,16 +69,13 @@ const AccessibilityPanel = () => {
     if (key === 'fontSize') {
       document.documentElement.style.fontSize = `${value}%`;
     } else if (key === 'highContrast') {
-      // Fix: Type check to ensure value is boolean
-      document.documentElement.classList.toggle('high-contrast', value === true);
+      document.documentElement.classList.toggle('high-contrast', Boolean(value));
     } else if (key === 'enhancedFocus') {
-      // Fix: Type check to ensure value is boolean
-      document.documentElement.classList.toggle('enhanced-focus', value === true);
+      document.documentElement.classList.toggle('enhanced-focus', Boolean(value));
     } else if (key === 'lineSpacing') {
       document.documentElement.style.setProperty('--line-spacing', `${value}%`);
     } else if (key === 'dyslexicFont') {
-      // Fix: Type check to ensure value is boolean
-      document.documentElement.classList.toggle('dyslexic-font', value === true);
+      document.documentElement.classList.toggle('dyslexic-font', Boolean(value));
     } else if (key === 'readingGuide') {
       // Toggle reading guide visibility
       if (value) {
