@@ -1,3 +1,4 @@
+
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
@@ -131,6 +132,46 @@ body {
 .high-contrast h5,
 .high-contrast h6 {
   color: #F6C90E !important;
+}
+
+/* Showcase page specific high contrast improvements */
+.high-contrast .garden-section-light {
+  background-color: #111 !important;
+}
+
+.high-contrast .garden-section-dark {
+  background-color: #000 !important;
+}
+
+.high-contrast .text-[#3A4750],
+.high-contrast .text-[#3A4750]/80 {
+  color: #fff !important;
+}
+
+.high-contrast p {
+  color: #fff !important;
+}
+
+.high-contrast .bg-white {
+  background-color: #222 !important;
+}
+
+.high-contrast .Card {
+  background-color: #222 !important;
+  border: 1px solid #F6C90E !important;
+}
+
+.high-contrast .CardContent {
+  color: #fff !important;
+}
+
+.high-contrast .list-disc li {
+  color: #fff !important;
+}
+
+.high-contrast .bg-[#F0F0F0] {
+  background-color: #222 !important;
+  border: 1px solid #F6C90E !important;
 }
 
 /* Keep the accessibility panel visible in high contrast mode */
