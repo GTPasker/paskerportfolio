@@ -39,7 +39,7 @@ const AccessibilityPanel = () => {
   // On component mount, check if we need to restore any saved preferences
   useEffect(() => {
     // Check if high contrast is already applied (on page reload)
-    if (document.documentElement.classList.contains('high-contrast')) {
+    if (document.body.classList.contains('high-contrast-active')) {
       setSettings(prev => ({ ...prev, highContrast: true }));
     }
     
@@ -69,7 +69,7 @@ const AccessibilityPanel = () => {
     if (key === 'fontSize') {
       document.documentElement.style.fontSize = `${value}%`;
     } else if (key === 'highContrast') {
-      document.documentElement.classList.toggle('high-contrast', Boolean(value));
+      document.body.classList.toggle('high-contrast-active', Boolean(value));
     } else if (key === 'enhancedFocus') {
       document.documentElement.classList.toggle('enhanced-focus', Boolean(value));
     } else if (key === 'lineSpacing') {
