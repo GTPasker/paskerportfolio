@@ -124,7 +124,7 @@ body {
 }
 
 .high-contrast a,
-.high-contrast button:not(.bg-[#F6C90E]),
+.high-contrast button:not(.bg-\[#F6C90E\]),
 .high-contrast h1,
 .high-contrast h2,
 .high-contrast h3,
@@ -143,8 +143,8 @@ body {
   background-color: #000 !important;
 }
 
-.high-contrast .text-[#3A4750],
-.high-contrast .text-[#3A4750]/80 {
+.high-contrast .text-\[#3A4750\],
+.high-contrast .text-\[#3A4750\]\/80 {
   color: #fff !important;
 }
 
@@ -169,7 +169,7 @@ body {
   color: #fff !important;
 }
 
-.high-contrast .bg-[#F0F0F0] {
+.high-contrast .bg-\[#F0F0F0\] {
   background-color: #222 !important;
   border: 1px solid #F6C90E !important;
 }
@@ -181,7 +181,7 @@ body {
   color: #fff !important;
 }
 
-.high-contrast .bg-[#F6C90E] {
+.high-contrast .bg-\[#F6C90E\] {
   background-color: #F6C90E !important;
   color: #000 !important;
 }
