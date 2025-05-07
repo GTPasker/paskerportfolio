@@ -1,4 +1,3 @@
-
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
@@ -115,7 +114,7 @@ body {
 
 /* High contrast mode */
 .high-contrast {
-  filter: contrast(1.5);
+  filter: contrast(1.3);
 }
 
 .high-contrast body {
@@ -124,14 +123,52 @@ body {
 }
 
 .high-contrast a,
-.high-contrast button,
+.high-contrast button:not(.bg-[#F6C90E]),
 .high-contrast h1,
 .high-contrast h2,
 .high-contrast h3,
 .high-contrast h4,
 .high-contrast h5,
 .high-contrast h6 {
-  color: #ffff00 !important;
+  color: #F6C90E !important;
+}
+
+/* Keep the accessibility panel visible in high contrast mode */
+.high-contrast [role="dialog"][aria-label="Accessibility options"] {
+  background-color: #1A1F2C !important;
+  border: 2px solid #F6C90E !important;
+  color: #fff !important;
+}
+
+.high-contrast .bg-[#F6C90E] {
+  background-color: #F6C90E !important;
+  color: #000 !important;
+}
+
+.high-contrast [role="dialog"] button,
+.high-contrast [role="dialog"] label {
+  color: #fff !important;
+}
+
+.high-contrast [role="dialog"] span:not(.sr-only) {
+  color: #F6C90E !important;
+}
+
+.high-contrast [role="dialog"] [id*="slider"] {
+  background-color: #333 !important;
+}
+
+.high-contrast [role="dialog"] [id*="slider"] [data-orientation="horizontal"] {
+  background-color: #F6C90E !important;
+}
+
+.high-contrast [role="dialog"] [role="switch"] {
+  background-color: #333 !important;
+  border-color: #F6C90E !important;
+}
+
+.high-contrast [role="dialog"] [role="switch"][data-state="checked"] {
+  background-color: #F6C90E !important;
 }
 
 .high-contrast img,
