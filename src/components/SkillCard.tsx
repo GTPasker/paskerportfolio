@@ -9,8 +9,7 @@ import {
   Accessibility,
   Eye,
   EyeOff,
-  TextCursorInput,
-  Font
+  TextCursorInput
 } from 'lucide-react';
 
 interface SkillCardProps {
@@ -52,9 +51,9 @@ const SkillCard = ({
       case 'ethics':
         return <Accessibility {...iconProps} />;
       case 'growth':
-        return <Font {...iconProps} />;
+        return <TextCursor {...iconProps} />; // Changed from Font to TextCursor
       default:
-        return <Font {...iconProps} />;
+        return <TextCursor {...iconProps} />; // Changed from Font to TextCursor
     }
   };
 

@@ -43,13 +43,16 @@ const AccessibilityPanel = () => {
     if (key === 'fontSize') {
       document.documentElement.style.fontSize = `${value}%`;
     } else if (key === 'highContrast') {
-      document.documentElement.classList.toggle('high-contrast', value);
+      // Fix: Type check to ensure value is boolean
+      document.documentElement.classList.toggle('high-contrast', value === true);
     } else if (key === 'enhancedFocus') {
-      document.documentElement.classList.toggle('enhanced-focus', value);
+      // Fix: Type check to ensure value is boolean
+      document.documentElement.classList.toggle('enhanced-focus', value === true);
     } else if (key === 'lineSpacing') {
       document.documentElement.style.setProperty('--line-spacing', `${value}%`);
     } else if (key === 'dyslexicFont') {
-      document.documentElement.classList.toggle('dyslexic-font', value);
+      // Fix: Type check to ensure value is boolean
+      document.documentElement.classList.toggle('dyslexic-font', value === true);
     } else if (key === 'readingGuide') {
       // Toggle reading guide visibility
       if (value) {
