@@ -1,98 +1,57 @@
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 @layer base {
   :root {
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
-
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 221.2 83.2% 53.3%;
     --primary-foreground: 210 40% 98%;
-
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
-
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
-
     --accent: 210 40% 96.1%;
     --accent-foreground: 222.2 47.4% 11.2%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
+    --ring: 221.2 83.2% 53.3%;
     --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-    
-    /* Garden theme colors */
-    --garden-yellow: 45 93% 51%;
-    --garden-red: 359 100% 65%;
-    --garden-dark: 210 20% 24%;
+    --line-spacing: 100%;
+    --garden-yellow: 47 92% 52%;
+    --garden-red: 0 100% 65%;
+    --garden-dark: 210 14% 27%;
     --garden-light: 0 0% 94%;
   }
 
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
-
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
-
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
     --primary-foreground: 222.2 47.4% 11.2%;
-
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
-
     --muted: 217.2 32.6% 17.5%;
     --muted-foreground: 215 20.2% 65.1%;
-
     --accent: 217.2 32.6% 17.5%;
     --accent-foreground: 210 40% 98%;
-
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-    
-    /* Garden theme colors in dark mode */
-    --garden-yellow: 45 93% 51%;
-    --garden-red: 359 100% 65%;
-    --garden-dark: 210 20% 11%;
-    --garden-light: 0 0% 18%;
+    --ring: 224.3 76.3% 48%;
   }
 }
 
@@ -100,18 +59,26 @@
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
-    font-family: 'Lato', sans-serif;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Merriweather', serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
 
-/* Animation delays for staggered animations */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  line-height: var(--line-spacing);
+}
+
+.font-merriweather {
+  font-family: 'Merriweather', serif;
+}
+
+/* Animation delay utilities */
 .animation-delay-100 {
   animation-delay: 100ms;
 }
@@ -132,168 +99,94 @@
   animation-delay: 500ms;
 }
 
-@layer utilities {
-  .garden-gradient {
-    background: linear-gradient(135deg, rgba(246,201,14,0.05) 0%, rgba(255,78,80,0.05) 100%);
-  }
-
-  .garden-section-light {
-    @apply bg-garden-light/50 dark:bg-garden-dark/50;
-    background-image: 
-      radial-gradient(circle at 20% 30%, rgba(246, 201, 14, 0.03) 0%, transparent 60%),
-      radial-gradient(circle at 80% 70%, rgba(255, 78, 80, 0.03) 0%, transparent 60%);
-  }
-
-  .dark .garden-section-light {
-    background-image: 
-      radial-gradient(circle at 20% 30%, rgba(246, 201, 14, 0.05) 0%, transparent 60%),
-      radial-gradient(circle at 80% 70%, rgba(255, 78, 80, 0.05) 0%, transparent 60%);
-  }
-
-  .garden-section-dark {
-    @apply bg-[#3A4750] dark:bg-[#1a2026];
-    background-image: 
-      radial-gradient(circle at 70% 20%, rgba(246, 201, 14, 0.04) 0%, transparent 50%),
-      radial-gradient(circle at 30% 80%, rgba(255, 78, 80, 0.04) 0%, transparent 50%);
-  }
-
-  .dark .garden-section-dark {
-    background-image: 
-      radial-gradient(circle at 70% 20%, rgba(246, 201, 14, 0.06) 0%, transparent 50%),
-      radial-gradient(circle at 30% 80%, rgba(255, 78, 80, 0.06) 0%, transparent 50%);
-  }
-
-  .bg-pattern-soil {
-    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%233a4750' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  }
-
-  .bg-pattern-leaves {
-    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23f6c90e' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
-  }
-
-  .organic-shadow {
-    box-shadow: 0 10px 30px -5px rgba(58, 71, 80, 0.1), 
-                0 4px 10px -3px rgba(58, 71, 80, 0.05);
-  }
-  
-  /* Enhanced interactive elements */
-  .interactive-card {
-    @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
-  }
-  
-  .primary-button {
-    @apply bg-garden-yellow text-garden-dark font-medium rounded-md py-3 px-6 
-           transition-all duration-300 hover:bg-garden-yellow/90 hover:shadow-md
-           active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-garden-yellow/50;
-  }
-  
-  .secondary-button {
-    @apply bg-garden-dark text-white font-medium rounded-md py-3 px-6
-           transition-all duration-300 hover:bg-garden-dark/90 hover:shadow-md
-           active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-garden-dark/50;
-  }
-  
-  .outline-button {
-    @apply border-2 border-garden-dark text-garden-dark font-medium rounded-md py-3 px-6
-           transition-all duration-300 hover:bg-garden-dark/5 hover:shadow-sm
-           active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-garden-dark/50;
-  }
-  
-  /* Enhanced content grouping */
-  .content-group {
-    @apply bg-white dark:bg-gray-800 rounded-lg p-6 shadow-sm border border-gray-100 dark:border-gray-700
-           transition-all duration-300 hover:shadow-md;
-  }
-  
-  /* Section styling with enhanced spacing */
-  .content-section {
-    @apply py-16 md:py-20 relative;
-  }
+/* Focus indicators for keyboard navigation */
+.enhanced-focus :focus {
+  outline: 3px solid hsl(var(--garden-yellow)) !important;
+  outline-offset: 3px !important;
 }
 
-/* Background glow effects */
-.glow-accent-1 {
-  position: relative;
+.enhanced-focus button:focus,
+.enhanced-focus a:focus,
+.enhanced-focus input:focus,
+.enhanced-focus select:focus,
+.enhanced-focus textarea:focus {
+  box-shadow: 0 0 0 3px hsl(var(--garden-yellow)), 0 0 0 5px rgba(0, 0, 0, 0.2) !important;
 }
 
-.glow-accent-1::before {
-  content: '';
-  position: absolute;
-  width: 70%;
-  height: 40%;
-  left: 15%;
-  bottom: -20%;
-  background: radial-gradient(circle, rgba(246, 201, 14, 0.2) 0%, rgba(246, 201, 14, 0) 70%);
-  border-radius: 50%;
-  z-index: -1;
-  filter: blur(20px);
+/* High contrast mode */
+.high-contrast {
+  filter: contrast(1.5);
 }
 
-.glow-accent-2 {
-  position: relative;
+.high-contrast body {
+  background-color: #000 !important;
+  color: #fff !important;
 }
 
-.glow-accent-2::before {
-  content: '';
-  position: absolute;
-  width: 70%;
-  height: 40%;
-  left: 15%;
-  bottom: -15%;
-  background: radial-gradient(circle, rgba(255, 78, 80, 0.15) 0%, rgba(255, 78, 80, 0) 70%);
-  border-radius: 50%;
-  z-index: -1;
-  filter: blur(18px);
+.high-contrast a,
+.high-contrast button,
+.high-contrast h1,
+.high-contrast h2,
+.high-contrast h3,
+.high-contrast h4,
+.high-contrast h5,
+.high-contrast h6 {
+  color: #ffff00 !important;
 }
 
-.garden-border {
-  position: relative;
+.high-contrast img,
+.high-contrast svg {
+  filter: grayscale(100%) contrast(150%);
 }
 
-.garden-border::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 1px solid rgba(246, 201, 14, 0.2);
-  border-radius: inherit;
+/* Dyslexic font */
+.dyslexic-font body,
+.dyslexic-font p,
+.dyslexic-font h1,
+.dyslexic-font h2,
+.dyslexic-font h3,
+.dyslexic-font h4,
+.dyslexic-font h5,
+.dyslexic-font h6,
+.dyslexic-font span,
+.dyslexic-font div,
+.dyslexic-font a,
+.dyslexic-font button,
+.dyslexic-font input,
+.dyslexic-font textarea,
+.dyslexic-font select {
+  font-family: Arial, sans-serif !important;
+  letter-spacing: 0.05em !important;
+  word-spacing: 0.1em !important;
+}
+
+/* Reading guide */
+#reading-guide {
+  transition: top 0.1s ease;
   pointer-events: none;
-  transition: all 0.3s ease;
 }
 
-.garden-border:hover::after {
-  border-color: rgba(246, 201, 14, 0.4);
-  box-shadow: 0 0 15px rgba(246, 201, 14, 0.1);
-}
-
-/* Enhanced animations */
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Star field classes */
-.star {
+/* Skip to content */
+.sr-only {
   position: absolute;
-  background-color: #ffffff;
-  border-radius: 50%;
-  animation: pulse 4s infinite ease-in-out;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
 
-/* Focus styles for accessibility */
-:focus-visible {
-  outline: 2px solid #F6C90E;
-  outline-offset: 2px;
+.sr-only.focus:not-sr-only {
+  position: absolute;
+  width: auto;
+  height: auto;
+  padding: 1rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  z-index: 9999;
 }

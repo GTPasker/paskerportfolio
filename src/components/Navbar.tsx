@@ -105,7 +105,7 @@ const Navbar = () => {
             aria-label="Gabriel Pasker - Home page"
           >
             <span className="relative z-10">Gabriel Pasker</span>
-            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#F6C90E] transition-all duration-300 group-hover:w-full group-focus:w-full"></span>
+            <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-[#F6C90E] transition-all duration-300 group-hover:w-full group-focus:w-full" aria-hidden="true"></span>
           </Link>
         </div>
 
@@ -149,7 +149,7 @@ const Navbar = () => {
           aria-expanded={mobileMenuOpen}
           aria-controls="mobile-menu"
         >
-          {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {mobileMenuOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
         </Button>
       </div>
 
@@ -158,7 +158,8 @@ const Navbar = () => {
         <div 
           id="mobile-menu"
           className="md:hidden bg-[#3A4750]/95 text-white dark:bg-[#1a2026]/95 backdrop-blur-sm animate-slide-in-bottom"
-          role="navigation"
+          role="dialog"
+          aria-modal="true"
           aria-label="Mobile Navigation"
         >
           <div className="container mx-auto px-4 py-4 flex flex-col space-y-2">
