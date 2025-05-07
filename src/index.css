@@ -143,35 +143,23 @@ body {
   background-color: #000 !important;
 }
 
+/* Make text clearly visible on any background */
 .high-contrast .text-\[#3A4750\],
-.high-contrast .text-\[#3A4750\]\/80 {
-  color: #fff !important;
-}
-
-.high-contrast p {
-  color: #fff !important;
-}
-
-.high-contrast .bg-white {
-  background-color: #222 !important;
-}
-
-.high-contrast .Card {
-  background-color: #222 !important;
-  border: 1px solid #F6C90E !important;
-}
-
-.high-contrast .CardContent {
-  color: #fff !important;
-}
-
+.high-contrast .text-\[#3A4750\]\/80,
+.high-contrast p,
+.high-contrast .CardContent,
 .high-contrast .list-disc li {
   color: #fff !important;
+  text-shadow: 0px 1px 2px rgba(0,0,0,0.8) !important;
 }
 
+/* Ensure contrast between text and background */
+.high-contrast .bg-white,
+.high-contrast .Card,
 .high-contrast .bg-\[#F0F0F0\] {
   background-color: #222 !important;
   border: 1px solid #F6C90E !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.5) !important;
 }
 
 /* Keep the accessibility panel visible in high contrast mode */
@@ -184,6 +172,7 @@ body {
 .high-contrast .bg-\[#F6C90E\] {
   background-color: #F6C90E !important;
   color: #000 !important;
+  font-weight: bold !important;
 }
 
 .high-contrast [role="dialog"] button,
@@ -212,9 +201,42 @@ body {
   background-color: #F6C90E !important;
 }
 
+/* Better contrast for images and icons */
 .high-contrast img,
 .high-contrast svg {
   filter: grayscale(100%) contrast(150%);
+}
+
+/* Preserve section distinctiveness in normal mode */
+.garden-section-light {
+  background-color: #F0F0F0;
+  position: relative;
+  overflow: hidden;
+}
+
+.garden-section-dark {
+  background-color: #3A4750;
+  position: relative;
+  overflow: hidden;
+}
+
+.garden-border {
+  border-left: 4px solid #F6C90E;
+}
+
+.organic-shadow {
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+/* Make sure Card content is readable in high contrast */
+.high-contrast .Card * {
+  border-color: #F6C90E !important;
+}
+
+/* Add a subtle glow to important elements in high contrast */
+.high-contrast .glow-accent-1,
+.high-contrast .glow-accent-2 {
+  box-shadow: 0 0 8px #F6C90E !important;
 }
 
 /* Dyslexic font */
